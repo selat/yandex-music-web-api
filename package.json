@@ -1,5 +1,5 @@
 {
-  "name": "yandex-music-api2",
+  "name": "yandex-music-web-api",
   "version": "0.0.1",
   "description": "Unofficial Yandex Music API",
   "main": "index.js",
