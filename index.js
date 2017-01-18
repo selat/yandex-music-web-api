@@ -1,10 +1,12 @@
 var https = require('https')
 var url = require('url')
 var hash = require('./yandexhash')
+// Stores cookie
+var secrets = require('./secrets')
 
 var options = {
   hostname: 'music.yandex.ru',
-  headers: {'X-Retpath-Y': 'https%3A%2F%2Fmusic.yandex.ru%2F'}
+  headers: {'X-Retpath-Y': 'https%3A%2F%2Fmusic.yandex.ru%2F', 'Cookie': secrets.cookie}
 }
 
 function downloadMedia (data, songId) {
