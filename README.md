@@ -1,6 +1,6 @@
 This is an unofficial API for Yandex Music.
 
 ### TODO:
-- [ ] Search
+- [x] Search
 - [ ] Fetch song info
 - [ ] Download songs

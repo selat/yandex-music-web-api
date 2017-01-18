@@ -1,12 +1,12 @@
 var https = require('https')
 var url = require('url')
 var hash = require('./yandexhash')
-// Stores cookie
-var secrets = require('./secrets')
+var search = require('./search')
+var headers = require('./headers')
 
 var options = {
   hostname: 'music.yandex.ru',
-  headers: {'X-Retpath-Y': 'https%3A%2F%2Fmusic.yandex.ru%2F', 'Cookie': secrets.cookie}
+  headers: headers.headers
 }
 
 function downloadMedia (data, songId) {
@@ -80,4 +80,14 @@ function fetchAlbum () {
   })
 }
 
-fetchAlbum()
+// Maximum supported size is 500x500
+function getAlbumCoverUri (album, size) {
+  return album.coverUri.substr(0, album.coverUri.length - 2) + size + 'x' + size
+}
+
+// fetchAlbum()
+
+search.searchAlbums('краснознамённая', (js) => {
+  console.log(js.albums)
+  console.log(getAlbumCoverUri(js.albums.items[0], 400))
+})
