@@ -53,7 +53,6 @@ function getArtist(artistId, callback) {
   var query = querystring.stringify({
     artist: artistId
   })
-  // https://music.yandex.ru/handlers/artist.jsx?artist=519187&what=&sort=&dir=&lang=ru&external-domain=music.yandex.ru&overembed=false&ncrnd=0.5167254488564074
   request.getJson('music.yandex.ru', '/handlers/artist.jsx?' + query, callback)
 }
 

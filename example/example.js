@@ -17,8 +17,8 @@ yapi.searchAlbums('краснознамённая', (js) => {
   // console.log(js)
 })
 
-rawData = ''
-yapi.downloadTrack(5450573, 599671, (data) => rawData += data, () => {
-  console.log('downloaded!')
-  fs.writeFileSync('track.mp3', rawData)
+var data = []
+yapi.downloadTrack(5450573, 599671, (chunk) => data.push(chunk), () => {
+  console.log('downloaded ', data.length, ' chunks')
+  fs.writeFileSync('track.mp3', Buffer.concat(data))
 })
