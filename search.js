@@ -1,6 +1,5 @@
 var querystring = require('querystring')
-var https = require('https')
-var headers = require('./headers')
+var request = require('./request')
 
 // Possible values for 'type' field:
 // albums - search only for albums
@@ -18,19 +17,8 @@ function search (query, searchType, callback) {
   // lang=ru
   // overembed=false
   // ncrnd=0.49198139212100345
-  var options = {
-    hostname: 'music.yandex.ru',
-    path: '/handlers/music-search.jsx?' + urlQuery,
-    headers: headers.headers
-  }
-  https.get(options, (res) => {
-    var rawData = ''
-    res.on('data', (chunk) => rawData += chunk)
-    res.on('end', () => {
-      var js = JSON.parse(rawData)
-      callback(js)
-    })
-  })
+  request.getJson('music.yandex.ru', '/handlers/music-search.jsx?' + urlQuery,
+                  callback)
 }
 
 exports.searchAlbums = (query, callback) => search(query, 'albums', callback)
