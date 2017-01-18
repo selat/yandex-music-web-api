@@ -6,6 +6,18 @@ const headers = {
   'Cookie': secrets.cookie
 }
 
+function getBlob (hostname, path, partialCallback, completeCallback) {
+  var options = {
+    hostname: hostname,
+    path: path,
+    headers: headers
+  }
+  https.get(options, (res) => {
+    res.on('data', partialCallback)
+    res.on('end', completeCallback)
+  })
+}
+
 function get (hostname, path, callback) {
   var options = {
     hostname: hostname,
@@ -30,3 +42,4 @@ function getJson (hostname, path, callback) {
 
 exports.get = get
 exports.getJson = getJson
+exports.getBlob = getBlob

@@ -3,30 +3,26 @@ var querystring = require('querystring')
 var hash = require('./yandexhash')
 var request = require('./request')
 
-function downloadMedia (data, songId) {
+function downloadMedia (data, trackId, partialCallback, completeCallback) {
   var hasht = hash.hash(data['path'].substring(1) + data['s'])
-  var path = '/get-mp3/' + hasht + '/' + data['ts'] + data['path'] + '?track-id=' + songId
-  request.get(data['host'], path, (data) => {
-    console.log('Downloaded song!')
-  })
+  var path = '/get-mp3/' + hasht + '/' + data['ts'] + data['path'] + '?track-id=' + trackId
+  request.getBlob(data['host'], path, partialCallback, completeCallback)
 }
 
-function fetchMedia (srcUrl, songId) {
+function fetchMedia (srcUrl, trackId, partialCallback, completeCallback) {
   var query = querystring.stringify({
     format: 'json'
   })
   request.getJson(srcUrl.hostname, srcUrl.path + '&' + query, (js) => {
-    downloadMedia(js, songId)
+    downloadMedia(js, trackId, partialCallback, completeCallback)
   })
 }
 
-function fetchSong (songId, albumId) {
-  var path = '/api/v2.1/handlers/track/' + songId + ':' + albumId +
+function downloadTrack (trackId, albumId, partialCallback, completeCallback) {
+  var path = '/api/v2.1/handlers/track/' + trackId + ':' + albumId +
   '/web-feed-promotion-playlist-saved/download/m?hq=0'
   request.getJson('music.yandex.ru', path, (js) => {
-    console.log(js)
-    // onsole.log(url.parse(js['src']))
-    fetchMedia(url.parse(js['src']), songId)
+    fetchMedia(url.parse(js['src']), trackId, partialCallback, completeCallback)
   })
 }
 
@@ -51,6 +47,14 @@ function getTrack(trackId, albumId, callback) {
     track: trackId + ':' + albumId
   })
   request.getJson('music.yandex.ru', '/handlers/track.jsx?' + query, callback)
+}
+
+function getArtist(artistId, callback) {
+  var query = querystring.stringify({
+    artist: artistId
+  })
+  // https://music.yandex.ru/handlers/artist.jsx?artist=519187&what=&sort=&dir=&lang=ru&external-domain=music.yandex.ru&overembed=false&ncrnd=0.5167254488564074
+  request.getJson('music.yandex.ru', '/handlers/artist.jsx?' + query, callback)
 }
 
 // Maximum supported size is 500x500
@@ -88,3 +92,5 @@ exports.searchAll = (query, callback) => search(query, 'all', callback)
 exports.getAlbumCoverUri = getAlbumCoverUri
 exports.getAlbum = getAlbum
 exports.getTrack = getTrack
+exports.getArtist = getArtist
+exports.downloadTrack = downloadTrack
