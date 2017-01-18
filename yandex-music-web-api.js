@@ -26,34 +26,29 @@ function downloadTrack (trackId, albumId, partialCallback, completeCallback) {
   })
 }
 
-function fetchAlbum () {
-  request.getJson('music.yandex.ru', '/handlers/album.jsx?album=434317', (js) => {
-    var arr = js['volumes'][0]
-    for (var i = 0, len = arr.length; i < len; ++i) {
-      fetchSong(arr[i].id, '434317')
-    }
-  })
-}
-
-function getAlbum(albumId, callback) {
+function getAlbum (albumId, callback) {
   var query = querystring.stringify({
     album: albumId
   })
   request.getJson('music.yandex.ru', '/handlers/album.jsx?' + query, callback)
 }
 
-function getTrack(trackId, albumId, callback) {
+function getTrack (trackId, albumId, callback) {
   var query = querystring.stringify({
     track: trackId + ':' + albumId
   })
   request.getJson('music.yandex.ru', '/handlers/track.jsx?' + query, callback)
 }
 
-function getArtist(artistId, callback) {
+function getArtist (artistId, callback) {
   var query = querystring.stringify({
     artist: artistId
   })
   request.getJson('music.yandex.ru', '/handlers/artist.jsx?' + query, callback)
+}
+
+function getFeed (callback) {
+  request.getJson('music.yandex.ru', '/handlers/feed.jsx', callback)
 }
 
 // Maximum supported size is 500x500
@@ -92,4 +87,5 @@ exports.getAlbumCoverUri = getAlbumCoverUri
 exports.getAlbum = getAlbum
 exports.getTrack = getTrack
 exports.getArtist = getArtist
+exports.getFeed = getFeed
 exports.downloadTrack = downloadTrack

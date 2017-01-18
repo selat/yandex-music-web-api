@@ -22,3 +22,5 @@ yapi.downloadTrack(5450573, 599671, (chunk) => data.push(chunk), () => {
   console.log('downloaded ', data.length, ' chunks')
   fs.writeFileSync('track.mp3', Buffer.concat(data))
 })
+
+yapi.getFeed((js) => console.log(js.days[0].tracksToPlay))

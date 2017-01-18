@@ -8,5 +8,5 @@ This is an unofficial API for Yandex Music.
 - [x] Download songs
 - [ ] Upload songs
 - [ ] JSON Schema for validation of all responses
-- [ ] Recommendations API
+- [x] Recommendations API
 - [ ] Playlists
