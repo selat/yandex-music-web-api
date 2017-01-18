@@ -51,6 +51,21 @@ function getFeed (callback) {
   request.getJson('music.yandex.ru', '/handlers/feed.jsx', callback)
 }
 
+function getLibrary (ownerNick, filter, callback) {
+  // Unknown options:
+  // likeFilter=favorite
+  // lang=tur
+  // external-domain=music.yandex.ru
+  // overembed=false
+  // ncrnd=0.03142031434416881
+  var query = querystring.stringify({
+    owner: ownerNick,
+    filter: filter,
+    likeFilter: 'favorite'
+  })
+  request.getJson('music.yandex.ru', '/handlers/library.jsx?' + query, callback)
+}
+
 // Maximum supported size is 500x500
 function getAlbumCoverUri (album, size) {
   return album.coverUri.substr(0, album.coverUri.length - 2) + size + 'x' + size
@@ -83,9 +98,23 @@ exports.searchArtists = (query, callback) => search(query, 'artists', (js) => {
 })
 exports.searchAll = (query, callback) => search(query, 'all', callback)
 
+exports.getLibraryAlbums = (ownerNickname, callback) => getLibrary(ownerNickname, 'albums', (js) => {
+  callback(js)
+})
+exports.getLibraryPlaylists = (ownerNickname, callback) => getLibrary(ownerNickname, 'playlists', (js) => {
+  callback(js)
+})
+exports.getLibraryTracks = (ownerNickname, callback) => getLibrary(ownerNickname, 'tracks', (js) => {
+  callback(js)
+})
+exports.getLibraryArtists = (ownerNickname, callback) => getLibrary(ownerNickname, 'artists', (js) => {
+  callback(js)
+})
+
 exports.getAlbumCoverUri = getAlbumCoverUri
 exports.getAlbum = getAlbum
 exports.getTrack = getTrack
 exports.getArtist = getArtist
 exports.getFeed = getFeed
 exports.downloadTrack = downloadTrack
+exports.getLibrary = getLibrary

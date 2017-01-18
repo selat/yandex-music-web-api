@@ -24,3 +24,7 @@ yapi.downloadTrack(5450573, 599671, (chunk) => data.push(chunk), () => {
 })
 
 yapi.getFeed((js) => console.log(js.days[0].tracksToPlay))
+
+yapi.getLibraryArtists('selatnick', (js) => {
+  console.log(js)
+})
