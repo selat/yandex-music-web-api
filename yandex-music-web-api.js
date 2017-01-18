@@ -46,6 +46,13 @@ function getAlbum(albumId, callback) {
   request.getJson('music.yandex.ru', '/handlers/album.jsx?' + query, callback)
 }
 
+function getTrack(trackId, albumId, callback) {
+  var query = querystring.stringify({
+    track: trackId + ':' + albumId
+  })
+  request.getJson('music.yandex.ru', '/handlers/track.jsx?' + query, callback)
+}
+
 // Maximum supported size is 500x500
 function getAlbumCoverUri (album, size) {
   return album.coverUri.substr(0, album.coverUri.length - 2) + size + 'x' + size
@@ -80,3 +87,4 @@ exports.searchAll = (query, callback) => search(query, 'all', callback)
 
 exports.getAlbumCoverUri = getAlbumCoverUri
 exports.getAlbum = getAlbum
+exports.getTrack = getTrack

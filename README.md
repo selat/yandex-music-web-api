@@ -4,7 +4,7 @@ This is an unofficial API for Yandex Music.
 - [x] Search
 - [x] Fetch album info
 - [ ] Fetch artist info
-- [ ] Fetch song info
+- [x] Fetch song info
 - [ ] Download songs
 - [ ] Upload songs
 - [ ] JSON Schema for validation of all responses
