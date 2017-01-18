@@ -2,10 +2,10 @@
   "name": "yandex-music-web-api",
   "version": "0.0.1",
   "description": "Unofficial Yandex Music API",
-  "main": "index.js",
+  "main": "yandex-music-web-api.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Uladzislau Paulovich",
+  "license": "MIT"
 }
