@@ -1,7 +1,9 @@
 var api = require('../yandex-music-web-api')
 var fs = require('fs')
+var secrets = require('./secrets')
 
 var yapi = new api.YandexMusicWebApi()
+yapi.setCookie(secrets.cookie)
 
 yapi.getAlbum(599671, (js) => {
   // console.log(js)
@@ -15,8 +17,8 @@ yapi.getArtist(519187, (js) => {
   // console.log(js)
 })
 
-yapi.searchAlbums('краснознамённая', (js) => {
-  // console.log(js)
+yapi.searchAlbums('краснознамённая дивизия', (js) => {
+  console.log('The first album: ', js.items[0])
 })
 
 var data = []
