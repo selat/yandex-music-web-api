@@ -98,16 +98,16 @@ exports.searchArtists = (query, callback) => search(query, 'artists', (js) => {
 })
 exports.searchAll = (query, callback) => search(query, 'all', callback)
 
-exports.getLibraryAlbums = (ownerNickname, callback) => getLibrary(ownerNickname, 'albums', (js) => {
+exports.getUserAlbums = (ownerNickname, callback) => getLibrary(ownerNickname, 'albums', (js) => {
   callback(js)
 })
-exports.getLibraryPlaylists = (ownerNickname, callback) => getLibrary(ownerNickname, 'playlists', (js) => {
+exports.getUserPlaylists = (ownerNickname, callback) => getLibrary(ownerNickname, 'playlists', (js) => {
   callback(js)
 })
-exports.getLibraryTracks = (ownerNickname, callback) => getLibrary(ownerNickname, 'tracks', (js) => {
+exports.getUserTracks = (ownerNickname, callback) => getLibrary(ownerNickname, 'tracks', (js) => {
   callback(js)
 })
-exports.getLibraryArtists = (ownerNickname, callback) => getLibrary(ownerNickname, 'artists', (js) => {
+exports.getUserArtists = (ownerNickname, callback) => getLibrary(ownerNickname, 'artists', (js) => {
   callback(js)
 })
 
