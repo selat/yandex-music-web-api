@@ -1,5 +1,7 @@
-var yapi = require('../yandex-music-web-api')
+var api = require('../yandex-music-web-api')
 var fs = require('fs')
+
+var yapi = new api.YandexMusicWebApi()
 
 yapi.getAlbum(599671, (js) => {
   // console.log(js)
