@@ -1,7 +1,7 @@
 var url = require('url')
 var querystring = require('querystring')
 var https = require('https')
-var hash = require('./yandexhash')
+var md5 = require('md5')
 
 /**
 * Create object
@@ -53,7 +53,7 @@ YandexMusicWebApi.prototype.getJson = function (hostname, path, callback) {
 }
 
 YandexMusicWebApi.prototype.downloadMedia = function (data, trackId, partialCallback, completeCallback) {
-  var hasht = hash.hash(data['path'].substring(1) + data['s'])
+  var hasht = md5('XGRlBW9FXlekgbPrRHuSiA' + data['path'].substring(1) + data['s'])
   var path = '/get-mp3/' + hasht + '/' + data['ts'] + data['path'] + '?track-id=' + trackId
   this.getBlob(data['host'], path, partialCallback, completeCallback)
 }
